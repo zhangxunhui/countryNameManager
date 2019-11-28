@@ -16,7 +16,6 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>."""
 
-import timing
 from time import clock
 from unidecode import unidecode
 import re
@@ -402,7 +401,11 @@ if __name__=="__main__":
     
     f = open(os.path.join(os.path.abspath('.'), 'data', 'sample.csv'), 'rb')
     reader = UnicodeReader(f)
+    count = 0
     for row in reader:
+        count += 1
+        if count == 10:
+            print "pause"
         location = row[0]
         location_norm = unidecode(location).lower().strip()
         country = cg.guess(location)
